@@ -1,0 +1,10 @@
+.tag {
+  font-size: 0.6rem;
+  padding: 0.125rem 0.3rem;
+  display: inline-block;
+  margin-left: auto;
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+}

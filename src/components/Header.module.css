@@ -1,0 +1,9 @@
+.btn {
+  position: absolute;
+  right: 20px;
+  top: 10;
+  transform: translateY(-50%);
+}
+.header-msg {
+  top: 30px;
+}
