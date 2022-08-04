@@ -169,7 +169,7 @@ const AddProject = () => {
 
     await sendRequest(
       {
-        url: "/api/v1/projects/createproject",
+        url: "https://o2blaunchpad.herokuapp.com/api/v1/projects/createproject",
         data: {
           name,
           teamOfProject: team,
