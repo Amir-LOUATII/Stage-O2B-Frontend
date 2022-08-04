@@ -72,7 +72,12 @@ const Project = ({
             <span className="d-iniline-block me-2 text-dark fw-bold">
               Token:
             </span>
-            <a href={etherscanLink} className="text-dark">
+            <a
+              href={etherscanLink}
+              className="text-dark"
+              rel="noreferrer"
+              target="_blank"
+            >
               {tokenName}
             </a>{" "}
             {` "${tokenSymbol}"`}
@@ -93,7 +98,7 @@ const Project = ({
             <span className="d-iniline-block me-2 text-dark fw-bold">
               Whitepaper:
             </span>
-            <a href={whitePaperLink} className="text-dark">
+            <a href={whitePaperLink} target="_blank" rel="noreferrer">
               whitepaper
             </a>
           </Card.Text>
