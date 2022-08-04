@@ -6,12 +6,12 @@ import classes from "./project.module.css";
 import { accountState, existingWalletState } from "../../recoil/atoms";
 import { useRecoilValue } from "recoil";
 import NotAuthorized from "./NotAuthorized";
+import { FiEdit2 } from "react-icons/fi";
 
 const Project = ({
   name,
   teamOfProject: team,
   state,
-  description,
   _id: id,
   idoStart,
   whitelistStart,
@@ -38,7 +38,13 @@ const Project = ({
   return (
     <>
       <Card style={{ width: "100%" }}>
-        <Card.Header className="position-relative" style={{ height: "40px" }}>
+        <Card.Header
+          className="position-relative d-flex justify-content-between align-items-center"
+          style={{ height: "40px" }}
+        >
+          <span>
+            <FiEdit2 /> Edit
+          </span>
           <small
             className={
               state === "whitelist soon"
@@ -88,7 +94,7 @@ const Project = ({
               Whitepaper:
             </span>
             <a href={whitePaperLink} className="text-dark">
-              {whitePaperLink}
+              whitepaper
             </a>
           </Card.Text>
           <Card.Text>
