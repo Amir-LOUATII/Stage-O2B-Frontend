@@ -17,13 +17,16 @@ const Projects = () => {
   const { isPending, success, sendRequest, error } = useHttp();
 
   useEffect(() => {
-    sendRequest({ url: "/api/v1/projects" }, (data) => {
-      setProjects(data.projects);
-      setCategories([
-        "All",
-        ...new Set(data.projects.map((project) => project.state)),
-      ]);
-    });
+    sendRequest(
+      { url: "https://o2blaunchpad.herokuapp.com/api/v1/projects" },
+      (data) => {
+        setProjects(data.projects);
+        setCategories([
+          "All",
+          ...new Set(data.projects.map((project) => project.state)),
+        ]);
+      }
+    );
   }, [sendRequest, setProjects]);
   return (
     <section className="pt-5 pb-3">

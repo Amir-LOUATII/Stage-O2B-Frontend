@@ -21,7 +21,7 @@ const SingleProductPage = () => {
 
   useEffect(() => {
     sendRequest(
-      { url: `http://localhost:5000/api/v1/projects/${id}` },
+      { url: `https://o2blaunchpad.herokuapp.com/api/v1/projects/${id}` },
       (data) => {
         setProject(data.project);
       }
