@@ -7,6 +7,7 @@ import { accountState, existingWalletState } from "../../recoil/atoms";
 import { useRecoilValue } from "recoil";
 import NotAuthorized from "./NotAuthorized";
 import { FiEdit2 } from "react-icons/fi";
+import { admin } from "../../data/admin";
 
 const Project = ({
   name,
@@ -42,9 +43,6 @@ const Project = ({
           className="position-relative d-flex justify-content-between align-items-center"
           style={{ height: "40px" }}
         >
-          <span>
-            <FiEdit2 /> Edit
-          </span>
           <small
             className={
               state === "whitelist soon"
@@ -108,11 +106,15 @@ const Project = ({
               new Date(whitelistStart).getDate()
             )}/${addZero(new Date(whitelistStart).getMonth() + 1)}/${new Date(
               whitelistStart
-            ).getFullYear()} - ${addZero(
+            ).getFullYear()} ${addZero(
+              new Date(whitelistStart).getHours()
+            )}:${addZero(new Date(whitelistStart).getMinutes())} - ${addZero(
               new Date(whitelistEnd).getDate()
             )}/${addZero(new Date(whitelistEnd).getMonth() + 1)}/${new Date(
               whitelistEnd
-            ).getFullYear()}  `}</span>
+            ).getFullYear()} ${addZero(
+              new Date(whitelistEnd).getHours()
+            )}:${addZero(new Date(whitelistEnd).getMinutes())}`}</span>
           </Card.Text>
           <Card.Text>
             <span className="fw-bold">IDO:</span>
@@ -120,9 +122,13 @@ const Project = ({
               new Date(idoStart).getDate()
             )}/${addZero(new Date(idoStart).getMonth() + 1)}/${addZero(
               new Date(idoStart).getFullYear()
-            )}-${addZero(new Date(idoEnd).getDate())}/${addZero(
+            )} ${addZero(new Date(idoStart).getHours())}:${addZero(
+              new Date(idoStart).getMinutes()
+            )} -${addZero(new Date(idoEnd).getDate())}/${addZero(
               new Date(idoEnd).getMonth() + 1
-            )}/${new Date(idoEnd).getFullYear()}  `}</span>
+            )}/${new Date(idoEnd).getFullYear()} ${addZero(
+              new Date(idoEnd).getHours()
+            )}:${addZero(new Date(idoEnd).getMinutes())} `}</span>
           </Card.Text>
         </Card.Body>
         <Card.Footer>
