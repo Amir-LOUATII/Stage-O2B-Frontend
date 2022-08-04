@@ -1,0 +1,25 @@
+.list {
+  background-color: rgb(236 236 236);
+  max-height: 350px;
+  overflow-y: scroll;
+}
+
+.list::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+.list::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+.list::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+.list::-webkit-scrollbar-thumb:hover {
+  background: #777;
+}

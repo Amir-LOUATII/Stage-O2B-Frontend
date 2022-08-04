@@ -1,4 +1,5 @@
 const webpack = require("webpack");
+
 module.exports = function override(config) {
   const fallback = config.resolve.fallback || {};
   Object.assign(fallback, {
@@ -17,6 +18,5 @@ module.exports = function override(config) {
       Buffer: ["buffer", "Buffer"],
     }),
   ]);
-  config.ignoreWarnings = [/Failed to parse source map/];
   return config;
 };

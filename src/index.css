@@ -20,3 +20,12 @@ button:focus,
 button:active {
   box-shadow: none !important;
 }
+
+*:focus::placeholder {
+  opacity: 0;
+}
+
+input,
+textarea {
+  border-color: #373737 !important;
+}

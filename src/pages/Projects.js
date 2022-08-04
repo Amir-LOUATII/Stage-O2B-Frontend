@@ -17,7 +17,7 @@ const Projects = () => {
   const { isPending, success, sendRequest, error } = useHttp();
 
   useEffect(() => {
-    sendRequest({ url: "http://localhost:5000/api/v1/projects" }, (data) => {
+    sendRequest({ url: "/api/v1/projects" }, (data) => {
       setProjects(data.projects);
       setCategories([
         "All",
@@ -28,7 +28,7 @@ const Projects = () => {
   return (
     <section className="pt-5 pb-3">
       <Container className="pt-3 min-vh-100 pt-4">
-        <h1 className="text-center text-muted text-bold mb-3">All projects</h1>
+        <h1 className="text-center text-muted text-bold mb-3">Projects</h1>
         {isPending && (
           <div className="w-100 h-100 d-flex justify-content-center align-items-center">
             <h1 className="h3">Loading...</h1>
@@ -39,12 +39,12 @@ const Projects = () => {
             <h1 className="h3">{error}</h1>
           </div>
         )}
-        {projects[0] && success && <Filter />}
-        {filteredProjects[0] && success && (
+        {projects.length != 0 && success && <Filter />}
+        {filteredProjects.length != "0" && success && (
           <Row className="gy-4">
             {filteredProjects.map((project) => {
               return (
-                <Col sm={6} lg={6} xl={4} key={project["_id"]}>
+                <Col md={6} lg={6} xl={4} key={project["_id"]}>
                   <Project {...project} />
                 </Col>
               );

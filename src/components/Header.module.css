@@ -7,3 +7,12 @@
 .header-msg {
   top: 30px;
 }
+
+.header {
+  z-index: 10000 !important ;
+  max-height: 60px !important;
+}
+
+.tooltip {
+  z-index: 10001 !important;
+}

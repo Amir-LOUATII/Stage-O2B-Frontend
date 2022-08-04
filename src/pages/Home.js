@@ -18,7 +18,7 @@ const Home = () => {
         </p>
         <Button className="d-block mt-5 mx-auto btn btn-primary">
           <Link to={"/projects"} className="text-decoration-none text-light">
-            All Project
+            All Projects
           </Link>
         </Button>
       </Container>

@@ -34,7 +34,7 @@ const Filter = () => {
             return (
               <Button
                 data-filter={cat}
-                className="btn-sm btn"
+                className="btn-sm btn text-capitalize mb-1"
                 variant="outline-primary"
                 active={filterTerm.toLowerCase() === cat.toLowerCase()}
                 key={cat}

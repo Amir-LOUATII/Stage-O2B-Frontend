@@ -1,18 +1,17 @@
 import React from "react";
-import { existingWalletState } from "../recoil/atoms";
+import { existingWalletState, web3State } from "../recoil/atoms";
 import { useRecoilValue } from "recoil";
-import { Container } from "react-bootstrap";
-import useWeb3 from "../utils/useWeb3";
+import useWeb3 from "../hooks/useWeb3";
 import { useEffect } from "react";
+import classes from "./Header.module.css";
 const WalletMsg = () => {
   const existingWallet = useRecoilValue(existingWalletState);
-  const { checkExistingWallet } = useWeb3();
-  useEffect(() => {
-    checkExistingWallet();
-  }, []);
+  const web3Api = useRecoilValue(web3State);
+  useWeb3();
+
   return (
-    <section className="w-100 position-fixed top-0 left-0">
-      {!existingWallet && (
+    <section className={` ${classes.header} w-100 position-fixed top-0 left-0`}>
+      {!existingWallet && !web3Api.isLoading && (
         <div
           className="text-center w-100"
           style={{ height: "30px", backgroundColor: "#5c99f3" }}

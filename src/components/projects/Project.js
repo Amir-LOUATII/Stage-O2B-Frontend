@@ -1,8 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Card } from "react-bootstrap";
-import { Link } from "react-router-dom";
-
+import { Link, useNavigate } from "react-router-dom";
+import addZero from "../../utils/timeAddZero";
 import classes from "./project.module.css";
+import { accountState, existingWalletState } from "../../recoil/atoms";
+import { useRecoilValue } from "recoil";
+import NotAuthorized from "./NotAuthorized";
 
 const Project = ({
   name,
@@ -15,66 +18,114 @@ const Project = ({
   whitelistEnd,
   idoEnd,
   tokenName,
+  tokenSymbol,
+  etherscanLink,
+  whitePaperLink,
+  totalSupply,
+  tokensToSell,
 }) => {
+  const navigate = useNavigate();
+  const account = useRecoilValue(accountState);
+  const [modalShow, setModalShow] = useState(false);
+  const exisitingWallet = useRecoilValue(existingWalletState);
+  const clickHandler = () => {
+    if (account) {
+      navigate(`/project/${id}`);
+    } else {
+      setModalShow(true);
+    }
+  };
   return (
-    <Card style={{ width: "100%" }}>
-      <Card.Header className="position-relative" style={{ height: "40px" }}>
-        <small
-          className={
-            state === "whitelist soon"
-              ? `${classes.tag}   rounded ms-auto bg-secondary text-white`
-              : state === "whitelist window opened"
-              ? `${classes.tag}  rounded bg-info ms-auto text-light `
-              : state === "IDO comming soon"
-              ? `${classes.tag} ${classes["upcomming-ido"]} rounded bg-primary text-white ms-auto `
-              : state === "IDO in progress"
-              ? `${classes.tag}  rounded ms-auto bg-success text-light`
-              : `${classes.tag}  rounded ms-auto bg-danger text-light`
-          }
-        >
-          {state}
-        </small>
-      </Card.Header>
-      <Card.Body>
-        <Card.Title className="text-capitalize">{name}</Card.Title>
-        <Card.Text className="mb-1">
-          <span className="d-inline-block h5 my-1">Owner:</span>
-          <span className="d-inline-block ms-1">{team}</span>
-        </Card.Text>
-        <Card.Text className="my-1 text-muted">{description}</Card.Text>
-        <Card.Text className="my-1 text-muted">
-          <span className="d-iniline-block me-2 text-dark fw-bold">
-            Token Name:
-          </span>
-          {tokenName}
-        </Card.Text>
-        <Card.Text>
-          <span className="fw-bold">Whitelist application:</span>
-          <span className="d-inline-block ms-2">{`${new Date(
-            whitelistStart
-          ).getDate()}/${new Date(whitelistStart).getMonth() + 1}/${new Date(
-            whitelistStart
-          ).getFullYear()}-${new Date(whitelistEnd).getDate()}/${
-            new Date(whitelistEnd).getMonth() + 1
-          }/${new Date(whitelistEnd).getFullYear()}  `}</span>
-        </Card.Text>
-        <Card.Text>
-          <span className="fw-bold">Whitelist application:</span>
-          <span className="d-inline-block ms-2">{`${new Date(
-            idoStart.toString()
-          ).getDate()}/${new Date(idoStart).getMonth() + 1}/${new Date(
-            idoStart
-          ).getFullYear()}-${new Date(idoEnd).getDate()}/${
-            new Date(idoEnd).getMonth() + 1
-          }/${new Date(idoEnd).getFullYear()}  `}</span>
-        </Card.Text>
-      </Card.Body>
-      <Card.Footer>
-        <Button className="btn-sm d-block mx-auto" variant="putline-primary">
-          <Link to={`/project/${id}`}>Details</Link>
-        </Button>
-      </Card.Footer>
-    </Card>
+    <>
+      <Card style={{ width: "100%" }}>
+        <Card.Header className="position-relative" style={{ height: "40px" }}>
+          <small
+            className={
+              state === "whitelist soon"
+                ? `${classes.tag}   rounded ms-auto bg-secondary text-white`
+                : state === "whitelist window opened"
+                ? `${classes.tag}  rounded bg-info ms-auto text-light `
+                : state === "IDO comming soon"
+                ? `${classes.tag} ${classes["upcomming-ido"]} rounded bg-primary text-white ms-auto `
+                : state === "IDO in progress"
+                ? `${classes.tag}  rounded ms-auto bg-success text-light`
+                : `${classes.tag}  rounded ms-auto bg-danger text-light`
+            }
+          >
+            {state}
+          </small>
+        </Card.Header>
+        <Card.Body>
+          <Card.Title className="text-capitalize">{name}</Card.Title>
+          <Card.Text className="mb-1">
+            <span className="d-inline-block fw-bold my-1">Owner:</span>
+            <span className="d-inline-block ms-1">{team}</span>
+          </Card.Text>
+
+          <Card.Text className="my-1 text-muted">
+            <span className="d-iniline-block me-2 text-dark fw-bold">
+              Token:
+            </span>
+            <a href={etherscanLink} className="text-dark">
+              {tokenName}
+            </a>{" "}
+            {` "${tokenSymbol}"`}
+          </Card.Text>
+          <Card.Text className="my-1 text-muted">
+            <span className="d-iniline-block me-2 text-dark fw-bold">
+              Total supply:
+            </span>
+            <span>{totalSupply}</span>
+          </Card.Text>
+          <Card.Text className="my-1 text-muted">
+            <span className="d-iniline-block me-2 text-dark fw-bold">
+              Tokens to sell in the IDO::
+            </span>
+            <span>{tokensToSell}</span>
+          </Card.Text>
+          <Card.Text className="my-1 text-muted">
+            <span className="d-iniline-block me-2 text-dark fw-bold">
+              Whitepaper:
+            </span>
+            <a href={whitePaperLink} className="text-dark">
+              {whitePaperLink}
+            </a>
+          </Card.Text>
+          <Card.Text>
+            <span className="fw-bold">Whitelist application:</span>
+            <span className="d-inline-block ms-2">{`${addZero(
+              new Date(whitelistStart).getDate()
+            )}/${addZero(new Date(whitelistStart).getMonth() + 1)}/${new Date(
+              whitelistStart
+            ).getFullYear()} - ${addZero(
+              new Date(whitelistEnd).getDate()
+            )}/${addZero(new Date(whitelistEnd).getMonth() + 1)}/${new Date(
+              whitelistEnd
+            ).getFullYear()}  `}</span>
+          </Card.Text>
+          <Card.Text>
+            <span className="fw-bold">IDO:</span>
+            <span className="d-inline-block ms-2">{`${addZero(
+              new Date(idoStart).getDate()
+            )}/${addZero(new Date(idoStart).getMonth() + 1)}/${addZero(
+              new Date(idoStart).getFullYear()
+            )}-${addZero(new Date(idoEnd).getDate())}/${addZero(
+              new Date(idoEnd).getMonth() + 1
+            )}/${new Date(idoEnd).getFullYear()}  `}</span>
+          </Card.Text>
+        </Card.Body>
+        <Card.Footer>
+          <Button
+            className="btn-sm d-block mx-auto"
+            variant="outline-primary"
+            onClick={clickHandler}
+          >
+            Details
+          </Button>
+        </Card.Footer>
+      </Card>
+      <NotAuthorized show={modalShow} onHide={() => setModalShow(false)} />
+    </>
   );
 };
 
