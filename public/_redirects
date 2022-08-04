@@ -1,2 +1,2 @@
-/api/* https://o2blaunchpad.herokuapp.com:splat 200
+/api/* https://o2blaunchpad.herokuapp.com/:splat 200
 /* /index.html 200   
